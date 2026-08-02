@@ -1,36 +1,3 @@
-# Soundboard สำหรับ Discord (C# / WPF)
-
-โปรแกรม Soundboard บน Windows: กดปุ่ม (หรือกด Hotkey แม้ไม่ได้โฟกัสหน้าต่างโปรแกรม) เพื่อเล่นไฟล์เสียง
-ออกไปยังอุปกรณ์เสียงที่เลือกไว้ (เช่น VB-CABLE) เพื่อให้ Discord ได้ยินเสียงนั้นเหมือนเป็นไมค์
-
-## สิ่งที่ต้องมีก่อน build
-
-1. **Visual Studio 2022** (Community ก็ได้ ฟรี) ติดตั้ง workload **".NET desktop development"**
-   หรือจะใช้ .NET SDK 8 + `dotnet` CLI ก็ได้
-2. **.NET 8 SDK** — ถ้ายังไม่มี โหลดจาก https://dotnet.microsoft.com/download/dotnet/8.0
-3. **VB-CABLE** (สำหรับส่งเสียงเข้า Discord) — https://vb-audio.com/Cable/
-   - โหลด ติดตั้งแบบ Run as Administrator แล้ว **รีสตาร์ทเครื่อง**
-
-## วิธี build และรัน
-
-### วิธีที่ 1: ใช้ Visual Studio
-1. เปิดโฟลเดอร์นี้ด้วย Visual Studio (File → Open → Folder หรือดับเบิลคลิก `SoundboardApp.csproj`)
-2. Visual Studio จะ restore แพ็กเกจ NAudio ให้อัตโนมัติ (ต้องต่อเน็ต)
-3. กด F5 เพื่อ build และรัน
-
-### วิธีที่ 2: ใช้ dotnet CLI
-```powershell
-cd SoundboardApp
-dotnet restore
-dotnet build -c Release
-dotnet run
-```
-ไฟล์ .exe ที่ build เสร็จจะอยู่ใน `bin\Release\net8.0-windows\`
-
-> **หมายเหตุ**: โปรเจกต์นี้เขียนไว้ให้ใช้งานได้เลย แต่ยังไม่ได้ build/ทดสอบจริงบนเครื่อง Windows
-> (พัฒนาบน sandbox ที่ไม่มี Windows + ไม่มีอินเทอร์เน็ตเข้าถึง NuGet) ดังนั้นเวลา build ครั้งแรก
-> อาจต้องแก้ error เล็กน้อยจาก IDE (เช่น using ที่ขาด) — โครงสร้างโค้ดหลักถูกต้องตาม NAudio 2.2.1 API
-
 ## วิธีใช้งาน
 
 โปรแกรมนี้ **มิกซ์เสียงไมค์จริง + เสียง soundboard ให้เองในตัว** (แบบเดียวกับ Soundpad)
