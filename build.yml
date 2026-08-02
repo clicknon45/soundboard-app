@@ -1,0 +1,37 @@
+name: Build Soundboard.exe
+
+# รันอัตโนมัติทุกครั้งที่ push โค้ดเข้า branch main
+# หรือกดรันเองได้จากแท็บ Actions (workflow_dispatch)
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest   # ใช้เครื่อง Windows ของ GitHub ในการ build ให้เรา
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Publish self-contained single-file exe
+        run: >
+          dotnet publish SoundboardApp.csproj
+          -c Release
+          -r win-x64
+          --self-contained true
+          -p:PublishSingleFile=true
+          -p:IncludeNativeLibrariesForSelfExtract=true
+          -o publish
+
+      - name: Upload Soundboard.exe as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Soundboard-exe
+          path: publish/Soundboard.exe
